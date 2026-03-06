@@ -3,7 +3,7 @@ type Messages = Record<string, any>
 export function deepMerge(target: Messages, source: Messages): Messages {
   const result = { ...target }
 
-  for (const key in source) {
+  for (const key of Object.keys(source)) {
     if (
       source[key] !== null &&
       typeof source[key] === 'object' &&

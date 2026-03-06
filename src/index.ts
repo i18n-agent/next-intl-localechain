@@ -18,11 +18,12 @@ export interface LocaleChainConfig {
   mergeDefaults?: boolean
 }
 
-interface RequestConfigParams {
+export interface RequestConfigParams {
   requestLocale: Promise<string | undefined>
+  locale?: string
 }
 
-interface RequestConfigResult {
+export interface RequestConfigResult {
   locale: string
   messages: Messages
 }
@@ -46,8 +47,8 @@ export function withLocaleChain(
     effectiveFallbacks = defaultFallbacks
   }
 
-  return async ({ requestLocale }) => {
-    const locale = (await requestLocale) || defaultLocale
+  return async ({ requestLocale, locale: explicitLocale }) => {
+    const locale = explicitLocale || (await requestLocale) || defaultLocale
     const chain = effectiveFallbacks[locale] || []
 
     const messages = await resolveMessages({

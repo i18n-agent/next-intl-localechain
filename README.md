@@ -59,7 +59,7 @@ Uses all built-in fallback chains. Covers Portuguese, Spanish, French, German, I
 withLocaleChain({
   loadMessages: (locale) => import(`../../messages/${locale}.json`).then(m => m.default),
   defaultLocale: 'en',
-  overrides: { 'pt-BR': ['pt-PT', 'pt'] }
+  overrides: { 'pt-BR': ['pt'] } // skip pt-PT, go straight to pt
 })
 ```
 

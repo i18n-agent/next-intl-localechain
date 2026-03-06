@@ -134,6 +134,22 @@ describe('withLocaleChain', () => {
     expect(loadMessages).toHaveBeenCalledTimes(1)
   })
 
+  it('uses explicit locale over requestLocale', async () => {
+    loadMessages.mockClear()
+    const getRequestConfig = withLocaleChain({
+      loadMessages,
+      defaultLocale: 'en',
+    })
+
+    const result = await getRequestConfig({
+      requestLocale: Promise.resolve('pt-BR'),
+      locale: 'en',
+    })
+
+    expect(result.locale).toBe('en')
+    expect(result.messages).toEqual(enMessages)
+  })
+
   it('re-exports defaultFallbacks', () => {
     expect(defaultFallbacks).toBeDefined()
     expect(defaultFallbacks['pt-BR']).toEqual(['pt-PT', 'pt'])
