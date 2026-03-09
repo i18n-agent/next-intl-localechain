@@ -1,5 +1,8 @@
 # next-intl-localechain
 
+[![npm version](https://img.shields.io/npm/v/next-intl-localechain)](https://www.npmjs.com/package/next-intl-localechain)
+[![license](https://img.shields.io/npm/l/next-intl-localechain)](LICENSE)
+
 Smart locale fallback chains for next-intl — because pt-BR users deserve pt-PT, not English.
 
 ## The Problem
