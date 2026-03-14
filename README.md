@@ -53,7 +53,7 @@ withLocaleChain({
 })
 ```
 
-Uses all built-in fallback chains. Covers Portuguese, Spanish, French, German, Italian, Dutch, Norwegian, and Malay regional variants.
+Uses all built-in fallback chains. Covers Chinese, Portuguese, Spanish, French, German, Italian, Dutch, English, Arabic, Norwegian, and Malay regional variants.
 
 ### With overrides (merge with defaults)
 
@@ -85,7 +85,52 @@ withLocaleChain({
 
 Only the chains you specify will be active. No defaults.
 
+## API Reference
+
+### `withLocaleChain(config)`
+
+Returns a function compatible with next-intl's `getRequestConfig`. Wraps message loading with fallback chain resolution.
+
+```ts
+export default getRequestConfig(withLocaleChain({
+  loadMessages: (locale) => import(`../../messages/${locale}.json`).then(m => m.default),
+  defaultLocale: 'en',
+}))
+```
+
+**Config options:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `loadMessages` | `(locale: string) => Messages \| Promise<Messages>` | *required* | Function to load messages for a locale |
+| `defaultLocale` | `string` | *required* | Base locale loaded first (lowest priority) |
+| `overrides` | `FallbackMap` | `undefined` | Custom fallback chains merged with defaults |
+| `fallbacks` | `FallbackMap` | `undefined` | Custom fallback chains (use with `mergeDefaults`) |
+| `mergeDefaults` | `boolean` | `true` | Whether to merge custom fallbacks with built-in defaults |
+
+### `deepMerge(target, source)`
+
+Recursively deep-merges two message objects. Source values override target values.
+
+### `defaultFallbacks`
+
+The built-in `FallbackMap` constant containing all default locale chains.
+
+### `mergeFallbacks(defaults, overrides)`
+
+Utility function that merges two `FallbackMap` objects. Overrides replace matching keys from defaults.
+
 ## Default Fallback Map
+
+### Chinese
+
+| Locale | Fallback Chain |
+|--------|---------------|
+| zh-Hant-HK | zh-Hant-TW -> zh-Hant -> (default locale) |
+| zh-Hant-MO | zh-Hant-HK -> zh-Hant-TW -> zh-Hant -> (default locale) |
+| zh-Hant-TW | zh-Hant -> (default locale) |
+| zh-Hans-SG | zh-Hans -> (default locale) |
+| zh-Hans-MY | zh-Hans -> (default locale) |
 
 ### Portuguese
 
@@ -93,6 +138,8 @@ Only the chains you specify will be active. No defaults.
 |--------|---------------|
 | pt-BR | pt-PT -> pt -> (default locale) |
 | pt-PT | pt -> (default locale) |
+| pt-AO | pt-PT -> pt -> (default locale) |
+| pt-MZ | pt-PT -> pt -> (default locale) |
 
 ### Spanish
 
@@ -155,6 +202,40 @@ Only the chains you specify will be active. No defaults.
 | Locale | Fallback Chain |
 |--------|---------------|
 | nl-BE | nl -> (default locale) |
+
+### English
+
+| Locale | Fallback Chain |
+|--------|---------------|
+| en-GB | en -> (default locale) |
+| en-AU | en-GB -> en -> (default locale) |
+| en-NZ | en-AU -> en-GB -> en -> (default locale) |
+| en-IN | en-GB -> en -> (default locale) |
+| en-CA | en -> (default locale) |
+| en-ZA | en-GB -> en -> (default locale) |
+| en-IE | en-GB -> en -> (default locale) |
+| en-SG | en-GB -> en -> (default locale) |
+
+### Arabic
+
+| Locale | Fallback Chain |
+|--------|---------------|
+| ar-SA | ar -> (default locale) |
+| ar-EG | ar -> (default locale) |
+| ar-AE | ar -> (default locale) |
+| ar-MA | ar -> (default locale) |
+| ar-DZ | ar -> (default locale) |
+| ar-IQ | ar -> (default locale) |
+| ar-KW | ar -> (default locale) |
+| ar-QA | ar -> (default locale) |
+| ar-BH | ar -> (default locale) |
+| ar-OM | ar -> (default locale) |
+| ar-JO | ar -> (default locale) |
+| ar-LB | ar -> (default locale) |
+| ar-TN | ar -> (default locale) |
+| ar-LY | ar -> (default locale) |
+| ar-SD | ar -> (default locale) |
+| ar-YE | ar -> (default locale) |
 
 ### Norwegian
 

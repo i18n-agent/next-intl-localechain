@@ -8,7 +8,7 @@ import { resolveMessages } from './message-resolver'
 export { defaultFallbacks, mergeFallbacks, type FallbackMap }
 export { deepMerge } from './message-resolver'
 
-type Messages = Record<string, any>
+export type Messages = Record<string, any>
 
 export interface LocaleChainConfig {
   loadMessages: (locale: string) => Messages | Promise<Messages>

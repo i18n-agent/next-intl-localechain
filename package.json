@@ -40,7 +40,7 @@
     "vitest": "^2.0.0",
     "tsup": "^8.0.0"
   },
-  "keywords": ["next-intl", "i18n", "locale", "fallback", "chain", "localization", "internationalization"],
+  "keywords": ["next-intl", "nextjs", "i18n", "locale", "fallback", "chain", "localization", "internationalization"],
   "author": "i18nagent.ai",
   "license": "MIT",
   "repository": {
