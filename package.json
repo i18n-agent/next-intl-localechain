@@ -1,6 +1,6 @@
 {
   "name": "next-intl-localechain",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Smart locale fallback chains for next-intl",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
